@@ -143,13 +143,12 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="item" items="${listUser}">
 											<tr>
-												<td>${item.id}</td>
-												<td>${item.firstName}</td>
-												<td>${item.role.name}</td>
+												<td>${user.id}</td>
+												<td>${user.fullName}</td>
+												<td>${user.userName}</td>
+												<td>${user.role.name}</td>
 											</tr>
-										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -158,7 +157,7 @@
 								<div class="col-md-8 col-xs-12">
 									<div class="white-box">
 										<form class="form-horizontal form-material"
-											action="<c:url value ='/user-add' />" method="post">
+											action="<c:url value ='/user-edit' />" method="post">
 											<div class="form-group">
 												<label class="col-md-12">Full Name</label>
 												<div class="col-md-12">
@@ -170,7 +169,7 @@
 												<label class="col-md-12">User Name</label>
 												<div class="col-md-12">
 													<input type="text" class="form-control form-control-line"
-														name="fullname">
+														name="username">
 												</div>
 											</div>
 											<div class="form-group">
@@ -183,6 +182,7 @@
 													</select>
 												</div>
 											</div>
+											<input type="hidden" name="id" value="${user.id}" />
 											<div class="form-group">
 												<div class="col-sm-12">
 													<button type="submit" class="btn btn-success">Update</button>
@@ -191,13 +191,13 @@
 												</div>
 											</div>
 										</form>
-										<c:if test="${!empty isSuccess}">
-											<c:if test="${isSuccess}">
-										Thêm thành công
+										<c:if test="${!empty result}">
+											<c:if test="${result}">
+										Cập nhật thành công
 									</c:if>
 
-											<c:if test="${!isSuccess}">
-										Thêm thất bại
+											<c:if test="${!result}">
+										Cập nhật thất bại
 									</c:if>
 										</c:if>
 									</div>

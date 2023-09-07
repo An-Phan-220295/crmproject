@@ -156,7 +156,7 @@
 												<td>${item.userName}</td>
 												<td>${item.role.name}</td>
 												<td><a href="/crm_project/user-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
-													<a href="#" class="btn btn-sm btn-danger" id="btn-xoa"
+													<a href="#" class="btn btn-sm btn-danger btn-xoa"
 													id-user="${item.id}">Xóa</a> <a href="user-details.html"
 													class="btn btn-sm btn-info">Xem</a></td>
 											</tr>

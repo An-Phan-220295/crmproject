@@ -30,4 +30,7 @@ public class UserService {
 	public Users getById(int id) {
 		return userRepository.getById(id);
 	}
+	public boolean updateById(int id, String fullName, String userName, int roleId) {
+		return userRepository.updateById(id, fullName, userName, roleId) > 0;
+	}
 }

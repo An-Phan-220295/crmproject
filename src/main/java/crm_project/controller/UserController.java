@@ -29,10 +29,11 @@ public class UserController extends HttpServlet {
 			break;
 			
 		case "/user-edit":
-			/*
-			 * req.setAttribute("listUser", userService.getAllUsers());
-			 * req.getRequestDispatcher("user-table.jsp").forward(req, resp);
-			 */
+			
+			int id =Integer.parseInt(req.getParameter("id"));
+			req.setAttribute("user", userService.getById(id));
+			req.setAttribute("listRole", userService.getAllRole());
+			req.getRequestDispatcher("user-edit.jsp").forward(req, resp);
 			break;
 
 		default:
@@ -42,21 +43,47 @@ public class UserController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String servletPath = req.getServletPath();
 		UserService userService = new UserService();
-		req.setCharacterEncoding("UTF-8");
-		resp.setContentType("text/html; charset=UTF-8");
-		resp.setCharacterEncoding("UTF-8");
+		switch (servletPath) {
+		case "/user-add":
+			req.setCharacterEncoding("UTF-8");
+			resp.setContentType("text/html; charset=UTF-8");
+			resp.setCharacterEncoding("UTF-8");
 
-		String fullName = req.getParameter("fullname");
-		String email = req.getParameter("email");
-		String password = req.getParameter("password");
-		String phone = req.getParameter("phone");
-		int idRole = Integer.parseInt(req.getParameter("role"));
+			String fullName = req.getParameter("fullname");
+			String email = req.getParameter("email");
+			String password = req.getParameter("password");
+			String phone = req.getParameter("phone");
+			int idRole = Integer.parseInt(req.getParameter("role"));
 
-		boolean isSuccess = userService.insertUser(fullName, email, password, phone, idRole);
+			boolean isSuccess = userService.insertUser(fullName, email, password, phone, idRole);
 
-		req.setAttribute("listRole", userService.getAllRole());
-		req.setAttribute("isSuccess", isSuccess);
-		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
+			req.setAttribute("listRole", userService.getAllRole());
+			req.setAttribute("isSuccess", isSuccess);
+			req.getRequestDispatcher("user-add.jsp").forward(req, resp);
+			break;
+
+		case "/user-edit":
+			req.setCharacterEncoding("UTF-8");
+			resp.setContentType("text/html; charset=UTF-8");
+			resp.setCharacterEncoding("UTF-8");
+			
+			int id =Integer.parseInt(req.getParameter("id"));
+			String fullNameEdited = req.getParameter("fullname");
+			String userNameEdited = req.getParameter("username");
+			int idRoleEdited = Integer.parseInt(req.getParameter("role"));
+			boolean result = userService.updateById(id, fullNameEdited, userNameEdited, idRoleEdited);
+			req.setAttribute("result", result);
+			req.getRequestDispatcher("user-edit.jsp").forward(req, resp);
+			
+			break;
+
+		default:
+			break;
+		}
+		
+		
+		
 	}
 }
