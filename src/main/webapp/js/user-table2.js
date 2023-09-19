@@ -1,9 +1,9 @@
 //khi nào file html được load thì thực hiện gì đó
-$(document).ready(function() {
+$(document).on('click','.btn-xoa',function() {
 	//Đăng ký sự kiện click: $("tên_thẻ||tên_class||id").click()
 	//class => .
 	//id => #
-	$(".btn-xoa").click(function() {
+	/*$(".btn-xoa").click(function() {*/
 		//Lấy giá trị thuộc tính (attr) bên thẻ cso class là btn-xoa
 		//$(this): đại diện cho function đang thực thi
 		var id = $(this).attr('id-user')
@@ -28,5 +28,5 @@ $(document).ready(function() {
 				}
 				console.log(result.data)
 			});
-	})
+	/*})*/
 })

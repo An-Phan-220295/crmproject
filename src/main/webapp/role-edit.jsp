@@ -19,12 +19,15 @@
 <link
 	href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <!-- animation CSS -->
 <link href="css/animate.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="css/style.css" rel="stylesheet">
 <!-- color CSS -->
 <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+<link rel="stylesheet" href="./css/custom.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -119,65 +122,76 @@
 			<div class="container-fluid">
 				<div class="row bg-title">
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h4 class="page-title">Thêm mới dự án</h4>
+						<h4 class="page-title">Chỉnh sửa quyền</h4>
 					</div>
+					<!-- /.col-lg-12 -->
 				</div>
-				<!-- /.row -->
-				<!-- .row -->
+				<!-- /row -->
 				<div class="row">
-					<div class="col-md-2 col-12"></div>
-					<div class="col-md-8 col-xs-12">
+					<div class="col-sm-12">
 						<div class="white-box">
-							<form class="form-horizontal form-material"
-								action="<c:url value='/groupwork-add'/>" method="post">
-								<div class="form-group">
-									<label class="col-md-12">Tên dự án</label>
-									<div class="col-md-12">
-										<input type="text" placeholder="Tên công việc"
-											class="form-control form-control-line" name="name">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-12">Ngày bắt đầu</label>
-									<div class="col-md-12">
-										<input type="text" placeholder="dd/MM/yyyy"
-											class="form-control form-control-line" name="startDate">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-12">Ngày kết thúc</label>
-									<div class="col-md-12">
-										<input type="text" placeholder="dd/MM/yyyy"
-											class="form-control form-control-line" name="endDate">
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-12">
-										<button type="submit" class="btn btn-success">Lưu lại</button>
-										<a href="/crm_project/groupwork" class="btn btn-primary">Quay lại</a>
-									</div>
-								</div>
-							</form>
-
-							<c:if test="${!empty result}">
-								<c:if test="${result == 0}">
-										Thêm thành công
+							<div class="table-responsive">
+								<table class="table" id="example">
+									<thead>
+										<tr>
+											<th>STT</th>
+											<th>Tên Quyền</th>
+											<th>Mô Tả</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>${role.id}</td>
+											<td>${role.name}</td>
+											<td>${role.description}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="row">
+								<div class="col-md-2 col-12"></div>
+								<div class="col-md-8 col-xs-12">
+									<div class="white-box">
+										<form class="form-horizontal form-material"
+											action="<c:url value='/role-edit'/>" method="post">
+											<div class="form-group">
+												<label class="col-md-12">Tên quyền</label>
+												<div class="col-md-12">
+													<input type="text" placeholder="Tên quyền"
+														class="form-control form-control-line" name="roleName" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-12">Mô tả</label>
+												<div class="col-md-12">
+													<input type="text" placeholder="Mô tả"
+														class="form-control form-control-line" name="description" />
+												</div>
+											</div>
+											<input type="hidden" name="id" value="${role.id}" />
+											<div class="form-group">
+												<div class="col-sm-12">
+													<button type="submit" class="btn btn-success">Cập
+														nhật</button>
+													<a href="/crm_project/roles" class="btn btn-primary">Quay
+														lại</a>
+												</div>
+											</div>
+											<c:if test="${!empty result}">
+												<c:if test="${result}">
+										Cập nhật thành công
 									</c:if>
-
-								<c:if test="${result == 1}">
-										Thêm thất bại
+												<c:if test="${!result}">
+										Cập nhật thất bại
 									</c:if>
-								<c:if test="${result == -1}">
-										Ngày không tồn tại, vui lòng nhập lại.
-									</c:if>
-							</c:if>
-							<%-- <c:if test="${!empty errorDate}">
-										Ngày không tồn tại, vui lòng nhập lại.
-							</c:if>
-							 --%>
+											</c:if>
+										</form>
+									</div>
+								</div>
+								<div class="col-md-2 col-12"></div>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-2 col-12"></div>
 				</div>
 				<!-- /.row -->
 			</div>
@@ -197,10 +211,17 @@
 		src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
 	<!--slimscroll JavaScript -->
 	<script src="js/jquery.slimscroll.js"></script>
+	<script src="js/jquery.dataTables.js"></script>
 	<!--Wave Effects -->
 	<script src="js/waves.js"></script>
 	<!-- Custom Theme JavaScript -->
 	<script src="js/custom.min.js"></script>
+	<!-- <script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		});
+	</script> -->
+	<script type="text/javascript" src="js/role-table.js"></script>
 </body>
 
 </html>

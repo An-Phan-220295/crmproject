@@ -19,4 +19,10 @@ public class RoleService {
 		int result = roleRepository.deleteById(id);
 		return result > 0;
 	}
+	public boolean updateById(int id, String name, String description) {
+		return roleRepository.updateById(id, name, description) > 0;
+	}
+	public Role getById(int id) {
+		return roleRepository.getById(id);
+	}
 }

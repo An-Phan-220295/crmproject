@@ -150,7 +150,7 @@
 												<td>${item.id}</td>
 												<td>${item.name}</td>
 												<td>${item.description}</td>
-												<td><a href="#" class="btn btn-sm btn-primary">Sửa</a>
+												<td><a href="/crm_project/role-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
 													<a href="#" class="btn btn-sm btn-danger deleterole"
 													id-role="${item.id}">Xóa</a></td>
 											</tr>

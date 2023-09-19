@@ -158,7 +158,7 @@
 												<td>${item.startDate}</td>
 												<td>${item.endDate}</td>
 												<td>${item.status.status}</td>
-												<td><a href="#" class="btn btn-sm btn-primary">Sửa</a>
+												<td><a href="/crm_project/task-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
 													<a href="#" class="btn btn-sm btn-danger bt-delete" id-task ="${item.id}">Xóa</a> <a
 													href="#" class="btn btn-sm btn-info">Xem</a></td>
 											</tr>

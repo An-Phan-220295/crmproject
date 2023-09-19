@@ -152,7 +152,7 @@
 												<td>${item.projectName}</td>
 												<td>${item.startDate}</td>
 												<td>${item.endDate}</td>
-												<td><a href="#" class="btn btn-sm btn-primary">Sửa</a>
+												<td><a href="/crm_project/groupwork-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
 													<a href="#" class="btn btn-sm btn-danger project-delete" id-project = "${item.id}">Xóa</a> <a
 													href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
 												</td>

@@ -124,4 +124,64 @@ public class ProjectRepository {
 		}
 		return result;
 	}
+
+	public Project getById(int id) {
+		String query = "SELECT id, name , DATE_FORMAT(startDate ,'%d/%m/%Y') AS startDate ,DATE_FORMAT(endDate ,'%d/%m/%Y') AS endDate\r\n"
+				+ "FROM Project WHERE id = ?";
+		Project project = new Project();
+
+		Connection connection = MysqlConfig.getConnect();
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				project.setId(id);
+				project.setProjectName(resultSet.getString("name"));
+				project.setStartDate(resultSet.getString("startDate"));
+				project.setEndDate(resultSet.getString("endDate"));
+			}
+		} catch (SQLException e) {
+			System.out.println("Lỗi truy xuất dữ liệu " + e.getLocalizedMessage());
+		} finally {
+			try {
+				// Đóng kết nối.
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối " + e.getLocalizedMessage());
+			}
+		}
+		return project;
+	}
+
+	public int[] updateById(int id, String name, String startDate, String endDate) {
+		String query = "UPDATE Project SET name = ?, \r\n" + "startDate = (STR_TO_DATE(?,\"%d/%m/%Y\")), \r\n"
+				+ "endDate = (STR_TO_DATE(?,\"%d/%m/%Y\")) WHERE id = ?";
+		int[] result = new int[2];
+
+		// The first element represent for result of the executeQuery
+		result[0] = 0;
+		// The second element represent for result of date format checking
+		result[1] = 0;
+
+		Connection connection = MysqlConfig.getConnect();
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, name);
+			statement.setString(2, startDate);
+			statement.setString(3, endDate);
+			statement.setInt(4, id);
+			result[0] = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Lỗi truy xuất dữ liệu " + e.getLocalizedMessage());
+			result[1] = 1;
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối " + e.getLocalizedMessage());
+			}
+		}
+		return result;
+	}
 }

@@ -9,7 +9,7 @@ public class ProjectService {
 	ProjectRepository projectRepository = new ProjectRepository();
 
 	public int projectAdd(String name, String startDate, String endDate) {
-		int[] result=projectRepository.projectAdd(name, startDate, endDate);
+		int[] result = projectRepository.projectAdd(name, startDate, endDate);
 		int queryResult = result[0];
 		int dateCheckingResult = result[1];
 		if (queryResult != 0 && dateCheckingResult == 0)
@@ -23,10 +23,32 @@ public class ProjectService {
 		// Return -1 represent the fail due to wrong format date.
 		return -1;
 	}
+
 	public List<Project> getAllProject() {
 		return projectRepository.getAllProject();
 	}
+
 	public boolean deleteById(int id) {
-		return projectRepository.deleteById(id)>0;
+		return projectRepository.deleteById(id) > 0;
+	}
+
+	public Project getById(int id) {
+		return projectRepository.getById(id);
+	}
+
+	public int updateById(int id, String name, String startDate, String endDate) {
+		int[] result = projectRepository.updateById(id, name, startDate, endDate);
+		int queryResult = result[0];
+		int dateCheckingResult = result[1];
+		if (queryResult != 0 && dateCheckingResult == 0)
+			// Return 0 represent the succession
+			return 0;
+
+		if (queryResult == 0 && dateCheckingResult == 0)
+			// Return 1 represent the fail due to Query.
+			return 1;
+
+		// Return -1 represent the fail due to wrong format date.
+		return -1;
 	}
 }

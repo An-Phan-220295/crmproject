@@ -10,22 +10,17 @@ public class TaskService {
 
 	public int insertTask(String name, String content, String startDate, String endDate, int idUser, int idProject ) {
 		int result[] = taskRepository.insertTask(name, content, startDate, endDate, idUser, idProject);
-		int queryResult1 = result[0];
-		int queryResult2 = result[2]; 
+		int queryResult = result[0];
 		int dateCheckingResult = result[1];
 		
-		if (queryResult1 != 0 && dateCheckingResult == 0 && queryResult2 != 0)
-			// Return 0 represent the succession
+		if (queryResult != 0 && dateCheckingResult == 0)
+			// Return 0 for the succession
 			return 0;
 
-		if (queryResult1 == 0 && dateCheckingResult == 0)
-			// Return 1 represent the fail due to Query1.
+		if (queryResult == 0 && dateCheckingResult == 0)
+			// Return 1 represent the fail due to Query.
 			return 1;
-		
-		if (queryResult2 == 0 && dateCheckingResult == 0)
-			// Return 2 represent the fail due to Query2.
-			return 2;
-
+	
 		// Return -1 represent the fail due to wrong format date.
 		return -1;
 	}
@@ -34,5 +29,14 @@ public class TaskService {
 	}
 	public boolean deleteById(int idTask) {
 		return taskRepository.deleteById(idTask) > 0;
+	}
+	public Task getById(int id) {
+		return taskRepository.getById(id);
+	}
+	public int currentIdStatus(int id) {
+		return taskRepository.currentIdStatus(id);
+	}
+	public int updateStatusById(int id, int idUser, int idStatus) {
+		return taskRepository.updateStatusById(id, idUser, idStatus);
 	}
 }

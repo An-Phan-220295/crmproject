@@ -174,7 +174,7 @@
 								<div class="form-group">
 									<div class="col-sm-12">
 										<button type="submit" class="btn btn-success">Lưu lại</button>
-										<a href="task.html" class="btn btn-primary">Quay lại</a>
+										<a href="/crm_project/task" class="btn btn-primary">Quay lại</a>
 									</div>
 								</div>
 							</form>
@@ -185,11 +185,8 @@
 									</c:if>
 
 								<c:if test="${result == 1}">
-										Thêm thất bại1
+										Thêm thất bại
 									</c:if>
-								<c:if test="${result == 2}">
-									Thêm thất bại2
-								</c:if>
 								<c:if test="${result == -1}">
 										Ngày không tồn tại, vui lòng nhập lại.
 									</c:if>
