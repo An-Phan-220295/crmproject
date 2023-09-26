@@ -7,15 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import crm_project.service.TaskService;
 import crm_project.service.UserService;
 
-@WebServlet(name = "userController", urlPatterns = { "/user-add", "/users","/user-edit" })
+@WebServlet(name = "userController", urlPatterns = { "/user-add", "/users","/user-edit","/user-details" })
 public class UserController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = req.getServletPath();
 		UserService userService = new UserService();
+		TaskService taskService = new TaskService();
 
 		switch (path) {
 		case "/user-add":
@@ -29,13 +31,20 @@ public class UserController extends HttpServlet {
 			break;
 			
 		case "/user-edit":
-			
 			int id =Integer.parseInt(req.getParameter("id"));
 			req.setAttribute("user", userService.getById(id));
 			req.setAttribute("listRole", userService.getAllRole());
 			req.getRequestDispatcher("user-edit.jsp").forward(req, resp);
 			break;
 
+		case "/user-details":
+			int idDetail =Integer.parseInt(req.getParameter("id"));
+			req.setAttribute("user", userService.getById(idDetail));
+			req.setAttribute("incomplete", taskService.getTaskByUserAndStatus(idDetail, 1));
+			req.setAttribute("inProgress", taskService.getTaskByUserAndStatus(idDetail, 2));
+			req.setAttribute("Completed", taskService.getTaskByUserAndStatus(idDetail, 3));
+			req.getRequestDispatcher("user-details.jsp").forward(req, resp);
+			break;
 		default:
 			break;
 		}
@@ -74,7 +83,9 @@ public class UserController extends HttpServlet {
 			String userNameEdited = req.getParameter("username");
 			int idRoleEdited = Integer.parseInt(req.getParameter("role"));
 			boolean result = userService.updateById(id, fullNameEdited, userNameEdited, idRoleEdited);
+			req.setAttribute("user", userService.getById(id));
 			req.setAttribute("result", result);
+			req.setAttribute("listRole", userService.getAllRole());
 			req.getRequestDispatcher("user-edit.jsp").forward(req, resp);
 			
 			break;
@@ -82,8 +93,5 @@ public class UserController extends HttpServlet {
 		default:
 			break;
 		}
-		
-		
-		
 	}
 }

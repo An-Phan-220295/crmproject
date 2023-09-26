@@ -104,7 +104,7 @@ public class UserRepository {
 	public Users getById(int id) {
 		Users users = new Users();
 
-		String query = "SELECT u.id, u.fullName ,u.userName ,r.name, r.id \r\n" + "FROM Users u \r\n"
+		String query = "SELECT u.id as userid,u.email, u.fullName ,u.userName ,r.name, r.id \r\n" + "FROM Users u \r\n"
 				+ "JOIN `Role` r \r\n" + "ON u.id_role = r.id \r\n" + "WHERE u.id = ?";
 		Connection connection = MysqlConfig.getConnect();
 		try {
@@ -113,9 +113,10 @@ public class UserRepository {
 
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				users.setId(resultSet.getInt("id"));
+				users.setId(id);
 				users.setUserName(resultSet.getString("userName"));
 				users.setFullName(resultSet.getString("fullName"));
+				users.setEmail(resultSet.getString("email"));
 				Role role = new Role();
 				role.setId(resultSet.getInt("id"));
 				role.setName(resultSet.getString("name"));
@@ -161,5 +162,37 @@ public class UserRepository {
 			}
 		}
 		return result;
+	}
+	public Users login(String email, String password) {
+		String query = "SELECT u.id, u.email as email, u.pwd as pwd,r.name as roleName FROM Users u \r\n"
+				+ "JOIN `Role` r ON u.id_role = r.id WHERE u.email = ? AND u.pwd = ?";
+		Users users = new Users();
+		Connection conn = MysqlConfig.getConnect();
+		try {
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setString(1, email);
+			statement.setString(2, password);
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				users.setId(resultSet.getInt("id"));
+				users.setEmail(resultSet.getString("email"));
+				users.setPassword(resultSet.getString("pwd"));
+				Role role = new Role();
+				role.setName(resultSet.getString("roleName"));
+				users.setRole(role);
+			}
+		} catch (
+
+		Exception e) {
+			System.out.println("Lỗi thực thi truy vấn" + e.getLocalizedMessage());
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				System.out.println("Lỗi đóng kết nối " + e.getLocalizedMessage());
+			}
+		}
+		return users;
 	}
 }

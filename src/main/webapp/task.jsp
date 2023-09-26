@@ -78,7 +78,7 @@
 								<li><a href="profile.html">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="/crm_project/logout">Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -124,10 +124,12 @@
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 						<h4 class="page-title">Danh sách công việc</h4>
 					</div>
-					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="/crm_project/task-add" class="btn btn-sm btn-success">Thêm
-							mới</a>
-					</div>
+					<c:if test="${sessionScope.role == 'Admin'}">
+						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
+							<a href="/crm_project/task-add" class="btn btn-sm btn-success">Thêm
+								mới</a>
+						</div>
+					</c:if>
 					<!-- /.col-lg-12 -->
 				</div>
 				<!-- /row -->
@@ -145,7 +147,10 @@
 											<th>Ngày Bắt Đầu</th>
 											<th>Ngày Kết Thúc</th>
 											<th>Trạng Thái</th>
-											<th>Hành Động</th>
+											<c:if
+												test="${sessionScope.role == 'Admin'||sessionScope.role == 'Leader'}">
+												<th>Hành Động</th>
+											</c:if>
 										</tr>
 									</thead>
 									<tbody>
@@ -158,9 +163,14 @@
 												<td>${item.startDate}</td>
 												<td>${item.endDate}</td>
 												<td>${item.status.status}</td>
-												<td><a href="/crm_project/task-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
-													<a href="#" class="btn btn-sm btn-danger bt-delete" id-task ="${item.id}">Xóa</a> <a
-													href="#" class="btn btn-sm btn-info">Xem</a></td>
+												<c:if
+													test="${sessionScope.role == 'Admin'||sessionScope.role == 'Leader'}">
+													<td><a href="/crm_project/task-edit?id=${item.id}"
+														class="btn btn-sm btn-primary">Sửa</a> <a href="#"
+														class="btn btn-sm btn-danger bt-delete"
+														id-task="${item.id}">Xóa</a> <a href="#"
+														class="btn btn-sm btn-info">Xem</a></td>
+												</c:if>
 											</tr>
 										</c:forEach>
 									</tbody>

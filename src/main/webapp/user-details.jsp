@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,8 +134,8 @@
 										<a href="javascript:void(0)"><img
 											src="plugins/images/users/genu.jpg"
 											class="thumb-lg img-circle" alt="img"></a>
-										<h4 class="text-white">Nguyễn Văn Tèo</h4>
-										<h5 class="text-white">info.teo@gmail.com</h5>
+										<h4 class="text-white">${user.fullName}</h4>
+										<h5 class="text-white">${user.email}</h5>
 									</div>
 								</div>
 							</div>
@@ -218,70 +221,85 @@
 				<!-- BEGIN DANH SÁCH CÔNG VIỆC -->
 				<h4>DANH SÁCH CÔNG VIỆC</h4>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-md-4">
 						<div class="white-box">
-							<div class="table-responsive">
-								<table class="table" id="example">
-									<thead>
-										<tr>
-											<th>STT</th>
-											<th>Tên Công Việc</th>
-											<th>Dự Án</th>
-											<th>Ngày Bắt Đầu</th>
-											<th>Ngày Kết Thúc</th>
-											<th>Trạng Thái</th>
-											<th>Hành Động</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Phân tích dự án</td>
-											<td>Dự án CRM</td>
-											<td>22/05/2019</td>
-											<td>30/05/2019</td>
-											<td>Đã hoàn thành</td>
-											<td><a href="profile-edit.html"
-												class="btn btn-sm btn-primary">Cập nhật</a></td>
-										</tr>
-										<tr>
-											<td>1</td>
-											<td>Thiết kế database</td>
-											<td>Dự án CRM</td>
-											<td>22/05/2019</td>
-											<td>30/05/2019</td>
-											<td>Đang thực hiện</td>
-											<td><a href="profile-edit.html"
-												class="btn btn-sm btn-primary">Cập nhật</a></td>
-										</tr>
-									</tbody>
-								</table>
+							<h3 class="box-title">Chưa thực hiện</h3>
+							<div class="message-center">
+								<div class="message-center">
+									<c:forEach var="item" items="${incomplete}">
+										<a href="#">
+											<div class="mail-contnet">
+												<h5>${item.name}</h5>
+												<span class="mail-desc"></span> <span class="time">Bắt
+													đầu: ${item.startDate}</span> <span class="time">Kết thúc:
+													${item.endDate}</span>
+											</div>
+										</a>
+									</c:forEach>
+								</div>
+
 							</div>
 						</div>
 					</div>
+					<div class="col-md-4">
+						<div class="white-box">
+							<h3 class="box-title">Đang thực hiện</h3>
+							<div class="message-center">
+								<div class="message-center">
+									<c:forEach var="item" items="${inProgress}">
+										<a href="#">
+											<div class="mail-contnet">
+												<h5>${item.name}</h5>
+												<span class="mail-desc"></span> <span class="time">Bắt
+													đầu: ${item.startDate}</span> <span class="time">Kết thúc:
+													${item.endDate}</span>
+											</div>
+										</a>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="white-box">
+							<h3 class="box-title">Đã hoàn thành</h3>
+							<div class="message-center">
+								<div class="message-center">
+									<c:forEach var="item" items="${completed}">
+										<a href="#">
+											<div class="mail-contnet">
+												<h5>${item.name}</h5>
+												<span class="mail-desc"></span> <span class="time">Bắt
+													đầu: ${item.startDate}</span> <span class="time">Kết thúc:
+													${item.endDate}</span>
+											</div>
+										</a>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+						<!-- END DANH SÁCH CÔNG VIỆC -->
+					</div>
+					<!-- /.container-fluid -->
+					<footer class="footer text-center"> 2018 &copy;
+						myclass.com </footer>
 				</div>
-				<!-- END DANH SÁCH CÔNG VIỆC -->
+				<!-- /#page-wrapper -->
 			</div>
-			<!-- /.container-fluid -->
-			<footer class="footer text-center"> 2018 &copy; myclass.com
-			</footer>
-		</div>
-		<!-- /#page-wrapper -->
-	</div>
-	<!-- /#wrapper -->
-	<!-- jQuery -->
-	<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- Menu Plugin JavaScript -->
-	<script
-		src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-	<!--slimscroll JavaScript -->
-	<script src="js/jquery.slimscroll.js"></script>
-	<!--Wave Effects -->
-	<script src="js/waves.js"></script>
-	<!-- Custom Theme JavaScript -->
-	<script src="js/custom.min.js"></script>
+			<!-- /#wrapper -->
+			<!-- jQuery -->
+			<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+			<!-- Bootstrap Core JavaScript -->
+			<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+			<!-- Menu Plugin JavaScript -->
+			<script
+				src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+			<!--slimscroll JavaScript -->
+			<script src="js/jquery.slimscroll.js"></script>
+			<!--Wave Effects -->
+			<script src="js/waves.js"></script>
+			<!-- Custom Theme JavaScript -->
+			<script src="js/custom.min.js"></script>
 </body>
 
 </html>

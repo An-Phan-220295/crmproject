@@ -58,6 +58,7 @@ public class ProjectController extends HttpServlet {
 			String startDateEdited = req.getParameter("startDate");
 			String endDateEdited = req.getParameter("endDate");
 			req.setAttribute("result", projectService.updateById(id, nameEdited, startDateEdited, endDateEdited));
+			req.setAttribute("project", projectService.getById(id));
 			req.getRequestDispatcher("groupwork-edit.jsp").forward(req, resp);
 			break;
 

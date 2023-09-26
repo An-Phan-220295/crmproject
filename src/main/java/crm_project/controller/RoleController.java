@@ -69,6 +69,7 @@ public class RoleController extends HttpServlet {
 			
 			boolean result = roleService.updateById(id, roleNameEdited, descriptionEdited);
 			req.setAttribute("result", result);
+			req.setAttribute("role", roleService.getById(id));
 			req.getRequestDispatcher("/role-edit.jsp").forward(req, resp);
 			break;
 

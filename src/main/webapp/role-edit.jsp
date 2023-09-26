@@ -78,7 +78,7 @@
 								<li><a href="profile.html">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="/crm_project/logout">Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -158,14 +158,16 @@
 												<label class="col-md-12">Tên quyền</label>
 												<div class="col-md-12">
 													<input type="text" placeholder="Tên quyền"
-														class="form-control form-control-line" name="roleName" />
+														class="form-control form-control-line" name="roleName"
+														value="${role.name}" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-md-12">Mô tả</label>
 												<div class="col-md-12">
 													<input type="text" placeholder="Mô tả"
-														class="form-control form-control-line" name="description" />
+														class="form-control form-control-line" name="description"
+														value="${role.description}" />
 												</div>
 											</div>
 											<input type="hidden" name="id" value="${role.id}" />

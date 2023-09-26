@@ -33,4 +33,7 @@ public class UserService {
 	public boolean updateById(int id, String fullName, String userName, int roleId) {
 		return userRepository.updateById(id, fullName, userName, roleId) > 0;
 	}
+	public Users login(String email, String password) {
+		return userRepository.login(email, password);
+	}
 }

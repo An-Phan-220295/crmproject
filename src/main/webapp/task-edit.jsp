@@ -78,7 +78,7 @@
 								<li><a href="profile.html">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="/crm_project/logout">Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -176,7 +176,7 @@
 													<label class="col-md-12">Tên công việc</label>
 													<div class="col-md-12">
 														<input type="text" placeholder="Tên công việc"
-															class="form-control form-control-line" name="task">
+															class="form-control form-control-line" name="task" value="${task.name}">
 													</div>
 												</div>
 												<div class="form-group">
@@ -193,14 +193,14 @@
 													<label class="col-md-12">Ngày bắt đầu</label>
 													<div class="col-md-12">
 														<input type="text" placeholder="dd/MM/yyyy"
-															class="form-control form-control-line" name="startDate">
+															class="form-control form-control-line" name="startDate" value="${task.startDate}">
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-12">Ngày kết thúc</label>
 													<div class="col-md-12">
 														<input type="text" placeholder="dd/MM/yyyy"
-															class="form-control form-control-line" name="endDate">
+															class="form-control form-control-line" name="endDate" value="${task.endDate}">
 													</div>
 												</div>
 												<div class="form-group">
@@ -214,6 +214,8 @@
 													</div>
 												</div>
 												<input type="hidden" name="id" value="${task.id}" />
+												<input type="hidden" name="currentProjectId" value="${task.project.id}" />
+												<input type="hidden" name="currentUserId" value="${task.users.id}" />
 												<div class="form-group">
 													<div class="col-sm-12">
 														<button type="submit" class="btn btn-success">Cập
@@ -225,11 +227,11 @@
 
 											<c:if test="${!empty result}">
 												<c:if test="${result == 1}">
-										Thêm thành công
+										Cập nhật thành công
 									</c:if>
 
 												<c:if test="${result == 0}">
-										Thêm thất bại
+										Cập nhật thất bại
 									</c:if>
 												<c:if test="${result == -1}">
 										Ngày không tồn tại, vui lòng nhập lại.

@@ -78,7 +78,7 @@
 								<li><a href="profile.html">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="/crm_project/logout">Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -162,14 +162,14 @@
 												<label class="col-md-12">Full Name</label>
 												<div class="col-md-12">
 													<input type="text" class="form-control form-control-line"
-														name="fullname">
+														name="fullname" value = "${user.fullName}">
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-md-12">User Name</label>
 												<div class="col-md-12">
 													<input type="text" class="form-control form-control-line"
-														name="username">
+														name="username" value = "${user.userName}">
 												</div>
 											</div>
 											<div class="form-group">
@@ -182,7 +182,7 @@
 													</select>
 												</div>
 											</div>
-											<input type="hidden" name="id" value="${user.id}" />
+											<input type="hidden" name="id" value = "${user.id}" />
 											<div class="form-group">
 												<div class="col-sm-12">
 													<button type="submit" class="btn btn-success">Update</button>

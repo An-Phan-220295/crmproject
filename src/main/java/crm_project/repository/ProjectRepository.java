@@ -13,6 +13,9 @@ import java.util.List;
 
 import crm_project.config.MysqlConfig;
 import crm_project.entity.Project;
+import crm_project.entity.Task;
+import crm_project.entity.TaskUser;
+import crm_project.entity.Users;
 
 public class ProjectRepository {
 	public int[] projectAdd(String name, String startDate, String endDate) {

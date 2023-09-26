@@ -78,7 +78,7 @@
 								<li><a href="profile.html">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="/crm_project/logout">Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -124,10 +124,12 @@
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 						<h4 class="page-title">Danh sách dự án</h4>
 					</div>
+					<c:if test = "${sessionScope.role == 'Admin'}">
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
 						<a href="/crm_project/groupwork-add" class="btn btn-sm btn-success">Thêm
 							mới</a>
 					</div>
+					</c:if>
 					<!-- /.col-lg-12 -->
 				</div>
 				<!-- /row -->
@@ -142,7 +144,9 @@
 											<th>Tên Dự Án</th>
 											<th>Ngày Bắt Đầu</th>
 											<th>Ngày Kết Thúc</th>
+											<c:if test = "${sessionScope.role == 'Admin'}">
 											<th>Hành Động</th>
+											</c:if>
 										</tr>
 									</thead>
 									<tbody>
@@ -152,10 +156,12 @@
 												<td>${item.projectName}</td>
 												<td>${item.startDate}</td>
 												<td>${item.endDate}</td>
+												<c:if test = "${sessionScope.role == 'Admin'}">
 												<td><a href="/crm_project/groupwork-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
 													<a href="#" class="btn btn-sm btn-danger project-delete" id-project = "${item.id}">Xóa</a> <a
 													href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
 												</td>
+												</c:if>
 											</tr>
 										</c:forEach>
 									</tbody>

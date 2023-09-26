@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="true"%>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> --%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +81,7 @@
 								<li><a href="profile.html">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="/crm_project/logout">Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -124,10 +127,12 @@
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 						<h4 class="page-title">Danh sách thành viên</h4>
 					</div>
+					<c:if test = "${sessionScope.role == 'Admin'}">					
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
 						<a href="/crm_project/user-add" class="btn btn-sm btn-success">Thêm
 							mới</a>
 					</div>
+					</c:if>
 					<!-- /.col-lg-12 -->
 				</div>
 				<!-- /row -->
@@ -143,7 +148,9 @@
 											<th>Last Name</th>
 											<th>Username</th>
 											<th>Role</th>
+											<c:if test = "${sessionScope.role == 'Admin'}">
 											<th>#</th>
+											</c:if>
 										</tr>
 									</thead>
 									<tbody>
@@ -155,10 +162,13 @@
 												<td>${item.lastName}</td>
 												<td>${item.userName}</td>
 												<td>${item.role.name}</td>
-												<td><a href="/crm_project/user-edit?id=${item.id}" class="btn btn-sm btn-primary">Sửa</a>
-													<a href="#" class="btn btn-sm btn-danger btn-xoa"
-													id-user="${item.id}">Xóa</a> <a href="user-details.html"
-													class="btn btn-sm btn-info">Xem</a></td>
+												<c:if test = "${sessionScope.role == 'Admin'}">
+													<td><a href="/crm_project/user-edit?id=${item.id}"
+														class="btn btn-sm btn-primary">Sửa</a> <a href="#"
+														class="btn btn-sm btn-danger btn-xoa" id-user="${item.id}">Xóa</a>
+														<a href="/crm_project/user-details?id=${item.id}"
+														class="btn btn-sm btn-info">Xem</a></td> 
+												</c:if>
 											</tr>
 										</c:forEach>
 									</tbody>

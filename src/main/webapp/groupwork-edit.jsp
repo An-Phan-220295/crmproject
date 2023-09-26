@@ -78,7 +78,7 @@
 								<li><a href="profile.html">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Đăng xuất</a></li>
+								<li><a href="/crm_project/logout">Đăng xuất</a></li>
 							</ul>
 						</div>
 					</li>
@@ -160,21 +160,21 @@
 									<label class="col-md-12">Tên dự án</label>
 									<div class="col-md-12">
 										<input type="text" placeholder="Tên công việc"
-											class="form-control form-control-line" name="name">
+											class="form-control form-control-line" name="name" value = "${project.projectName}">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-12">Ngày bắt đầu</label>
 									<div class="col-md-12">
 										<input type="text" placeholder="dd/MM/yyyy"
-											class="form-control form-control-line" name="startDate">
+											class="form-control form-control-line" name="startDate" value = "${project.startDate}">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-12">Ngày kết thúc</label>
 									<div class="col-md-12">
 										<input type="text" placeholder="dd/MM/yyyy"
-											class="form-control form-control-line" name="endDate">
+											class="form-control form-control-line" name="endDate" value = "${project.endDate}">
 									</div>
 								</div>
 								<input type="hidden" name="id" value="${project.id}" />
